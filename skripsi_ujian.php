@@ -15,7 +15,6 @@ if ($method == 'GET') {
         exit;
     }
 
-    // Ambil data pengajuan judul yang disetujui terbaru
     $sql_judul = "SELECT judul, pembimbing FROM skripsi_pengajuan WHERE nim = ? AND status = 'Disetujui' ORDER BY tgl_proses DESC LIMIT 1";
     $stmt_judul = $conn->prepare($sql_judul);
     $stmt_judul->bind_param("s", $nim);
@@ -23,8 +22,6 @@ if ($method == 'GET') {
     $result_judul = $stmt_judul->get_result();
     $judul_data = $result_judul->fetch_assoc();
 
-    // Ambil data IPK dan SKS dari tabel nilai (contoh: nilai kumulatif)
-    // Ini adalah placeholder, Anda harus mengimplementasikan logika ini sesuai dengan struktur database Anda
     $ipk_sks_data = [
         'ipk_terakhir' => 3.43,
         'jumlah_sks' => 130

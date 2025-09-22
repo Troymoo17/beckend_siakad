@@ -12,7 +12,6 @@ if ($method === 'GET') {
     $id = $_GET['id'] ?? null;
 
     if ($id) {
-        // Ambil detail pengumuman berdasarkan ID
         $sql = "SELECT * FROM pengumuman WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $id);
@@ -23,7 +22,6 @@ if ($method === 'GET') {
         echo json_encode(['status' => 'success', 'data' => $data]);
         $stmt->close();
     } else {
-        // Ambil semua pengumuman 3 bulan terakhir
         $tgl_tiga_bulan_lalu = date('Y-m-d', strtotime('-3 months'));
         $sql = "SELECT id, judul, tanggal_upload FROM pengumuman WHERE tanggal_upload >= ? ORDER BY tanggal_upload DESC";
         $stmt = $conn->prepare($sql);

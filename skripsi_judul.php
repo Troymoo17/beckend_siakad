@@ -36,7 +36,6 @@ if ($method == 'GET') {
     $baru_ulang = $_POST['baru_ulang'] ?? '';
     $tgl_pengajuan = date('Y-m-d');
     
-    // Asumsi pembimbing diisi dari backend setelah pengajuan disetujui, jadi biarkan null saat POST
     $pembimbing = null;
     $cetak_form = null;
 

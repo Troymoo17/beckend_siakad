@@ -51,7 +51,6 @@ if (!empty($nim)) {
         ];
     }
     
-    // Ambil data profil untuk informasi tambahan
     $stmt_profile = $conn->prepare("SELECT prodi, program FROM mahasiswa WHERE nim = ?");
     $stmt_profile->bind_param("s", $nim);
     $stmt_profile->execute();

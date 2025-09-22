@@ -7,7 +7,6 @@ include 'db_config.php';
 $nim = $_GET['nim'] ?? '';
 
 if (!empty($nim)) {
-    // Ambil jadwal UTS
     $stmt_uts = $conn->prepare("SELECT tanggal, hari, mulai, selesai, ruangan, mata_kuliah, kelas, dosen, no_kursi, soal FROM jadwal_ujian WHERE nim = ? AND jenis_ujian = 'UTS' ORDER BY tanggal ASC");
     $stmt_uts->bind_param("s", $nim);
     $stmt_uts->execute();
@@ -18,7 +17,6 @@ if (!empty($nim)) {
     }
     $stmt_uts->close();
 
-    // Ambil jadwal UAS
     $stmt_uas = $conn->prepare("SELECT tanggal, hari, mulai, selesai, ruangan, mata_kuliah, kelas, dosen, no_kursi, soal FROM jadwal_ujian WHERE nim = ? AND jenis_ujian = 'UAS' ORDER BY tanggal ASC");
     $stmt_uas->bind_param("s", $nim);
     $stmt_uas->execute();

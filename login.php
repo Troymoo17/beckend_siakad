@@ -15,8 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        // Anda harus menggunakan password_hash() dan password_verify() untuk keamanan
-        // Contoh: if (password_verify($inputPassword, $user['password'])) {
         if ($inputPassword === $user['password']) { // Contoh sederhana, GANTI DENGAN VERIFIKASI HASH!
             echo json_encode([
                 'status' => 'success',

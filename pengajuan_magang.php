@@ -15,16 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $baru_ulang = $_POST['baru_ulang'] ?? '';
     $rencana_mulai = $_POST['rencana_mulai'] ?? '';
     $rencana_selesai = $_POST['rencana_selesai'] ?? '';
-    $tgl_pengajuan = date('Y-m-d'); // Tanggal pengajuan otomatis
+    $tgl_pengajuan = date('d-m-Y');
 
-    // Validasi data
     if (empty($nim) || empty($jenis_tempat_magang) || empty($nama_tempat_magang) || empty($rencana_mulai) || empty($rencana_selesai)) {
         echo json_encode(['status' => 'error', 'message' => 'Data tidak lengkap.']);
         $conn->close();
         exit();
     }
 
-    // Query untuk menyimpan data
     $sql = "INSERT INTO pengajuan_magang (nim, jenis_tempat_magang, alamat, nama_tempat_magang, kota_kabupaten_magang, baru_ulang, rencana_mulai, rencana_selesai, tgl_pengajuan) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssssss", $nim, $jenis_tempat_magang, $alamat, $nama_tempat_magang, $kota_kabupaten_magang, $baru_ulang, $rencana_mulai, $rencana_selesai, $tgl_pengajuan);

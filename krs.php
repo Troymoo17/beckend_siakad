@@ -4,12 +4,10 @@ header('Access-Control-Allow-Origin: *');
 
 include 'db_config.php';
 
-// Ambil NIM dari localStorage atau sesi (sesuai implementasi login)
 $nim = $_GET['nim'] ?? '';
 $semester_sekarang = $_GET['semester'] ?? '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    // Tampilkan mata kuliah yang tersedia untuk semester ini
     if (!empty($nim) && !empty($semester_sekarang)) {
         $query = "SELECT kode_mk, nama_mk, sks FROM mata_kuliah WHERE semester = ?";
         $stmt = $conn->prepare($query);
@@ -21,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $mata_kuliah_tersedia[] = $row;
         }
 
-        // Tampilkan mata kuliah yang sudah diambil di KRS
         $query_krs = "SELECT kode_mk FROM krs WHERE nim = ? AND semester = ?";
         $stmt_krs = $conn->prepare($query_krs);
         $stmt_krs->bind_param("si", $nim, $semester_sekarang);
@@ -42,7 +39,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     }
 
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Tangani penambahan mata kuliah ke KRS
     $nim = $_POST['nim'] ?? '';
     $semester = $_POST['semester'] ?? '';
     $kode_mk = $_POST['kode_mk'] ?? '';

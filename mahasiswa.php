@@ -1,5 +1,4 @@
 <?php
-// File: mahasiswa.php
 header('Content-Type: application/json');
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST'); // Tambahkan metode POST
@@ -26,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         echo json_encode(['status' => 'error', 'message' => 'NIM tidak diberikan.']);
     }
 } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Logika untuk menangani pembaruan profil
     $nim = $_POST['nim'] ?? '';
     $nik = $_POST['nik'] ?? null;
     $email = $_POST['email'] ?? null;

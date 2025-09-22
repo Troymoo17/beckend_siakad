@@ -7,7 +7,6 @@ include 'db_config.php';
 $nim = $_GET['nim'] ?? '';
 
 if (!empty($nim)) {
-    // Ambil data KHS untuk IPS per semester
     $stmt_khs = $conn->prepare("SELECT * FROM khs WHERE nim = ? ORDER BY semester ASC");
     $stmt_khs->bind_param("s", $nim);
     $stmt_khs->execute();
@@ -28,7 +27,6 @@ if (!empty($nim)) {
     }
     $stmt_khs->close();
 
-    // Hitung IPK
     $ipk = ($total_sks_kumulatif > 0) ? round($total_bobot_sks_kumulatif / $total_sks_kumulatif, 2) : 0.00;
 
     echo json_encode([

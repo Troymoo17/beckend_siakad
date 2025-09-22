@@ -17,7 +17,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         exit();
     }
 
-    // Mengambil data mahasiswa (untuk virtual account) dan tagihan
     $sql = "SELECT m.virtual_account, t.* FROM mahasiswa m
             LEFT JOIN tagihan t ON m.nim = t.nim
             WHERE m.nim = ?

@@ -7,7 +7,6 @@ include 'db_config.php';
 $nim = $_GET['nim'] ?? '';
 
 if (!empty($nim)) {
-    // Ambil semester mahasiswa yang sedang berjalan dari tabel mahasiswa
     $stmt_mhs = $conn->prepare("SELECT semester_sekarang FROM mahasiswa WHERE nim = ?");
     $stmt_mhs->bind_param("s", $nim);
     $stmt_mhs->execute();
@@ -17,7 +16,6 @@ if (!empty($nim)) {
     $stmt_mhs->close();
 
     if ($semester_sekarang) {
-        // Ambil data kurikulum untuk semester yang sedang berjalan
         $stmt = $conn->prepare("
             SELECT
                 k.kode_mk,
